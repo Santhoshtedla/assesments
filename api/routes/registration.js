@@ -9,8 +9,8 @@ module.exports = function (router) {
     router.post('/', async (req,res) => {
         try{
             const record = req.body;
-            const oldUser = await users.findOne({email: req.body.email});
-            if(oldUser){
+            const existingUser = await users.findOne({email: req.body.email});
+            if(existingUser){
                 return res.send("User already exists. Please login");
             }
             const newUser = await users.create(record)
