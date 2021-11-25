@@ -1,19 +1,20 @@
 const nodeMailer = require('nodemailer')
 
-module.exports = (userName,email) => {
+module.exports = (userName,email,text) => {
     const transporter = nodeMailer.createTransport({
         service : 'gmail',
         auth : {
             user : 'santhoshtedla@gmail.com',
-            pass : '********'
+            pass : process.env.password
         }
     });
-    
+     
     var mailOptions = {
         from : 'santhoshtedla@gmail.com',
         to : email,
         subject : 'Registration update',
-        text : `Hi ${userName} , You are Successfully Registered `
+        text : text
+
     }
     
     transporter.sendMail(mailOptions , (err) => {
